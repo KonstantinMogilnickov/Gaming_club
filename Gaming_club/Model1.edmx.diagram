@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a41a1ccd919240c88973a415ae0895ed" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="Gaming_clubModel.date_of_game_library" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gaming_clubModel.exclusive_game" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gaming_clubModel.game" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gaming_clubModel.game_category" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gaming_clubModel.game_genre" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gaming_clubModel.game_thematic" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gaming_clubModel.players_of_game_library" Width="1.5" PointX="10.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gaming_clubModel.players_of_tournament" Width="1.5" PointX="13.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gaming_clubModel.status" Width="1.5" PointX="11.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gaming_clubModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gaming_clubModel.tournament" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gaming_clubModel.User_data" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <AssociationConnector Association="Gaming_clubModel.FK_date_of_game_library_game" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_date_of_game_library_responsible" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_players_of_game_library_date_of_game_library" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_game_exclusive_game" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_game_game_category" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_game_game_genre" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_game_game_thematic" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_tournament_game" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_players_of_game_library_User_data" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_players_of_tournament_status" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_players_of_tournament_tournament" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_players_of_tournament_User_data" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_tournament_User_data" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

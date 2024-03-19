@@ -1,0 +1,986 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Gaming_clubModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="date_of_game_library">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_game" Type="int" Nullable="false" />
+          <Property Name="id_UserData" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" />
+          <Property Name="start_date" Type="datetime" />
+          <Property Name="min_number_of_palyers" Type="int" />
+          <Property Name="max_number_of_palyers" Type="int" />
+          <Property Name="min_age" Type="int" />
+        </EntityType>
+        <EntityType Name="exclusive_game">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="exclusive" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="game">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="id_genre" Type="int" Nullable="false" />
+          <Property Name="id_thematics" Type="int" Nullable="false" />
+          <Property Name="age_limit" Type="int" Nullable="false" />
+          <Property Name="image" Type="nvarchar(max)" />
+          <Property Name="id_exclusive" Type="int" Nullable="false" />
+          <Property Name="id_category" Type="int" Nullable="false" />
+          <Property Name="price" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="game_category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="game_genre">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="genre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="game_thematic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="thematic" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="players_of_game_library">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_game_library" Type="int" Nullable="false" />
+          <Property Name="id_user_data" Type="int" Nullable="false" />
+          <Property Name="age" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="players_of_tournament">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_tournament" Type="int" Nullable="false" />
+          <Property Name="id_user_data" Type="int" Nullable="false" />
+          <Property Name="reg_date" Type="datetime" />
+          <Property Name="id_status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="40" />
+          <Property Name="status_description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tournament">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_game" Type="int" />
+          <Property Name="id_userData" Type="int" />
+          <Property Name="date_of_tournament" Type="datetime" />
+          <Property Name="min_age" Type="int" />
+          <Property Name="price" Type="int" />
+          <Property Name="title" Type="nchar" MaxLength="50" />
+          <Property Name="description" Type="nchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="User_data">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="patrrynumic" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="permission" Type="int" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="age" Type="nvarchar" MaxLength="50" />
+          <Property Name="image" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_date_of_game_library_game">
+          <End Role="game" Type="Self.game" Multiplicity="1" />
+          <End Role="date_of_game_library" Type="Self.date_of_game_library" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="date_of_game_library">
+              <PropertyRef Name="id_game" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_date_of_game_library_responsible">
+          <End Role="User_data" Type="Self.User_data" Multiplicity="1" />
+          <End Role="date_of_game_library" Type="Self.date_of_game_library" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="date_of_game_library">
+              <PropertyRef Name="id_UserData" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_game_exclusive_game">
+          <End Role="exclusive_game" Type="Self.exclusive_game" Multiplicity="1" />
+          <End Role="game" Type="Self.game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="exclusive_game">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game">
+              <PropertyRef Name="id_exclusive" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_game_game_category">
+          <End Role="game_category" Type="Self.game_category" Multiplicity="1" />
+          <End Role="game" Type="Self.game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game_category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_game_game_genre">
+          <End Role="game_genre" Type="Self.game_genre" Multiplicity="1" />
+          <End Role="game" Type="Self.game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game_genre">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game">
+              <PropertyRef Name="id_genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_game_game_thematic">
+          <End Role="game_thematic" Type="Self.game_thematic" Multiplicity="1" />
+          <End Role="game" Type="Self.game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game_thematic">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game">
+              <PropertyRef Name="id_thematics" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_players_of_game_library_date_of_game_library">
+          <End Role="date_of_game_library" Type="Self.date_of_game_library" Multiplicity="1" />
+          <End Role="players_of_game_library" Type="Self.players_of_game_library" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="date_of_game_library">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_of_game_library">
+              <PropertyRef Name="id_game_library" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_players_of_game_library_User_data">
+          <End Role="User_data" Type="Self.User_data" Multiplicity="1" />
+          <End Role="players_of_game_library" Type="Self.players_of_game_library" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_of_game_library">
+              <PropertyRef Name="id_user_data" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_players_of_tournament_status">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="players_of_tournament" Type="Self.players_of_tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_of_tournament">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_players_of_tournament_tournament">
+          <End Role="tournament" Type="Self.tournament" Multiplicity="1" />
+          <End Role="players_of_tournament" Type="Self.players_of_tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournament">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_of_tournament">
+              <PropertyRef Name="id_tournament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_players_of_tournament_User_data">
+          <End Role="User_data" Type="Self.User_data" Multiplicity="1" />
+          <End Role="players_of_tournament" Type="Self.players_of_tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_of_tournament">
+              <PropertyRef Name="id_user_data" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tournament_game">
+          <End Role="game" Type="Self.game" Multiplicity="0..1" />
+          <End Role="tournament" Type="Self.tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tournament">
+              <PropertyRef Name="id_game" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tournament_User_data">
+          <End Role="User_data" Type="Self.User_data" Multiplicity="0..1" />
+          <End Role="tournament" Type="Self.tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tournament">
+              <PropertyRef Name="id_userData" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище Gaming_clubModelContainer">
+          <EntitySet Name="date_of_game_library" EntityType="Self.date_of_game_library" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="exclusive_game" EntityType="Self.exclusive_game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="game" EntityType="Self.game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="game_category" EntityType="Self.game_category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="game_genre" EntityType="Self.game_genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="game_thematic" EntityType="Self.game_thematic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="players_of_game_library" EntityType="Self.players_of_game_library" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="players_of_tournament" EntityType="Self.players_of_tournament" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tournament" EntityType="Self.tournament" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_data" EntityType="Self.User_data" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_date_of_game_library_game" Association="Self.FK_date_of_game_library_game">
+            <End Role="game" EntitySet="game" />
+            <End Role="date_of_game_library" EntitySet="date_of_game_library" />
+          </AssociationSet>
+          <AssociationSet Name="FK_date_of_game_library_responsible" Association="Self.FK_date_of_game_library_responsible">
+            <End Role="User_data" EntitySet="User_data" />
+            <End Role="date_of_game_library" EntitySet="date_of_game_library" />
+          </AssociationSet>
+          <AssociationSet Name="FK_game_exclusive_game" Association="Self.FK_game_exclusive_game">
+            <End Role="exclusive_game" EntitySet="exclusive_game" />
+            <End Role="game" EntitySet="game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_game_game_category" Association="Self.FK_game_game_category">
+            <End Role="game_category" EntitySet="game_category" />
+            <End Role="game" EntitySet="game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_game_game_genre" Association="Self.FK_game_game_genre">
+            <End Role="game_genre" EntitySet="game_genre" />
+            <End Role="game" EntitySet="game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_game_game_thematic" Association="Self.FK_game_game_thematic">
+            <End Role="game_thematic" EntitySet="game_thematic" />
+            <End Role="game" EntitySet="game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_players_of_game_library_date_of_game_library" Association="Self.FK_players_of_game_library_date_of_game_library">
+            <End Role="date_of_game_library" EntitySet="date_of_game_library" />
+            <End Role="players_of_game_library" EntitySet="players_of_game_library" />
+          </AssociationSet>
+          <AssociationSet Name="FK_players_of_game_library_User_data" Association="Self.FK_players_of_game_library_User_data">
+            <End Role="User_data" EntitySet="User_data" />
+            <End Role="players_of_game_library" EntitySet="players_of_game_library" />
+          </AssociationSet>
+          <AssociationSet Name="FK_players_of_tournament_status" Association="Self.FK_players_of_tournament_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="players_of_tournament" EntitySet="players_of_tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK_players_of_tournament_tournament" Association="Self.FK_players_of_tournament_tournament">
+            <End Role="tournament" EntitySet="tournament" />
+            <End Role="players_of_tournament" EntitySet="players_of_tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK_players_of_tournament_User_data" Association="Self.FK_players_of_tournament_User_data">
+            <End Role="User_data" EntitySet="User_data" />
+            <End Role="players_of_tournament" EntitySet="players_of_tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tournament_game" Association="Self.FK_tournament_game">
+            <End Role="game" EntitySet="game" />
+            <End Role="tournament" EntitySet="tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tournament_User_data" Association="Self.FK_tournament_User_data">
+            <End Role="User_data" EntitySet="User_data" />
+            <End Role="tournament" EntitySet="tournament" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Gaming_clubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="date_of_game_library">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_game" Type="Int32" Nullable="false" />
+          <Property Name="id_UserData" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="DateTime" Precision="3" />
+          <Property Name="min_number_of_palyers" Type="Int32" />
+          <Property Name="max_number_of_palyers" Type="Int32" />
+          <Property Name="min_age" Type="Int32" />
+          <NavigationProperty Name="game" Relationship="Self.FK_date_of_game_library_game" FromRole="date_of_game_library" ToRole="game" />
+          <NavigationProperty Name="User_data" Relationship="Self.FK_date_of_game_library_responsible" FromRole="date_of_game_library" ToRole="User_data" />
+          <NavigationProperty Name="players_of_game_library" Relationship="Self.FK_players_of_game_library_date_of_game_library" FromRole="date_of_game_library" ToRole="players_of_game_library" />
+        </EntityType>
+        <EntityType Name="exclusive_game">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="exclusive" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="games" Relationship="Self.FK_game_exclusive_game" FromRole="exclusive_game" ToRole="game" />
+        </EntityType>
+        <EntityType Name="game">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_genre" Type="Int32" Nullable="false" />
+          <Property Name="id_thematics" Type="Int32" Nullable="false" />
+          <Property Name="age_limit" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_exclusive" Type="Int32" Nullable="false" />
+          <Property Name="id_category" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="date_of_game_library" Relationship="Self.FK_date_of_game_library_game" FromRole="game" ToRole="date_of_game_library" />
+          <NavigationProperty Name="exclusive_game" Relationship="Self.FK_game_exclusive_game" FromRole="game" ToRole="exclusive_game" />
+          <NavigationProperty Name="game_category" Relationship="Self.FK_game_game_category" FromRole="game" ToRole="game_category" />
+          <NavigationProperty Name="game_genre" Relationship="Self.FK_game_game_genre" FromRole="game" ToRole="game_genre" />
+          <NavigationProperty Name="game_thematic" Relationship="Self.FK_game_game_thematic" FromRole="game" ToRole="game_thematic" />
+          <NavigationProperty Name="tournaments" Relationship="Self.FK_tournament_game" FromRole="game" ToRole="tournament" />
+        </EntityType>
+        <EntityType Name="game_category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="games" Relationship="Self.FK_game_game_category" FromRole="game_category" ToRole="game" />
+        </EntityType>
+        <EntityType Name="game_genre">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="games" Relationship="Self.FK_game_game_genre" FromRole="game_genre" ToRole="game" />
+        </EntityType>
+        <EntityType Name="game_thematic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="thematic" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="games" Relationship="Self.FK_game_game_thematic" FromRole="game_thematic" ToRole="game" />
+        </EntityType>
+        <EntityType Name="players_of_game_library">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_game_library" Type="Int32" Nullable="false" />
+          <Property Name="id_user_data" Type="Int32" Nullable="false" />
+          <Property Name="age" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="date_of_game_library" Relationship="Self.FK_players_of_game_library_date_of_game_library" FromRole="players_of_game_library" ToRole="date_of_game_library" />
+          <NavigationProperty Name="User_data" Relationship="Self.FK_players_of_game_library_User_data" FromRole="players_of_game_library" ToRole="User_data" />
+        </EntityType>
+        <EntityType Name="players_of_tournament">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_tournament" Type="Int32" Nullable="false" />
+          <Property Name="id_user_data" Type="Int32" Nullable="false" />
+          <Property Name="reg_date" Type="DateTime" Precision="3" />
+          <Property Name="id_status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="status" Relationship="Self.FK_players_of_tournament_status" FromRole="players_of_tournament" ToRole="status" />
+          <NavigationProperty Name="tournament" Relationship="Self.FK_players_of_tournament_tournament" FromRole="players_of_tournament" ToRole="tournament" />
+          <NavigationProperty Name="User_data" Relationship="Self.FK_players_of_tournament_User_data" FromRole="players_of_tournament" ToRole="User_data" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status1" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="status_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="players_of_tournament" Relationship="Self.FK_players_of_tournament_status" FromRole="status" ToRole="players_of_tournament" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tournament">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_game" Type="Int32" />
+          <Property Name="id_userData" Type="Int32" />
+          <Property Name="date_of_tournament" Type="DateTime" Precision="3" />
+          <Property Name="min_age" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="game" Relationship="Self.FK_tournament_game" FromRole="tournament" ToRole="game" />
+          <NavigationProperty Name="players_of_tournament" Relationship="Self.FK_players_of_tournament_tournament" FromRole="tournament" ToRole="players_of_tournament" />
+          <NavigationProperty Name="User_data" Relationship="Self.FK_tournament_User_data" FromRole="tournament" ToRole="User_data" />
+        </EntityType>
+        <EntityType Name="User_data">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="patrrynumic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="permission" Type="Int32" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="age" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="date_of_game_library" Relationship="Self.FK_date_of_game_library_responsible" FromRole="User_data" ToRole="date_of_game_library" />
+          <NavigationProperty Name="players_of_game_library" Relationship="Self.FK_players_of_game_library_User_data" FromRole="User_data" ToRole="players_of_game_library" />
+          <NavigationProperty Name="players_of_tournament" Relationship="Self.FK_players_of_tournament_User_data" FromRole="User_data" ToRole="players_of_tournament" />
+          <NavigationProperty Name="tournaments" Relationship="Self.FK_tournament_User_data" FromRole="User_data" ToRole="tournament" />
+        </EntityType>
+        <Association Name="FK_date_of_game_library_game">
+          <End Role="game" Type="Self.game" Multiplicity="1" />
+          <End Role="date_of_game_library" Type="Self.date_of_game_library" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="date_of_game_library">
+              <PropertyRef Name="id_game" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_date_of_game_library_responsible">
+          <End Role="User_data" Type="Self.User_data" Multiplicity="1" />
+          <End Role="date_of_game_library" Type="Self.date_of_game_library" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="date_of_game_library">
+              <PropertyRef Name="id_UserData" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_players_of_game_library_date_of_game_library">
+          <End Role="date_of_game_library" Type="Self.date_of_game_library" Multiplicity="1" />
+          <End Role="players_of_game_library" Type="Self.players_of_game_library" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="date_of_game_library">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_of_game_library">
+              <PropertyRef Name="id_game_library" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_game_exclusive_game">
+          <End Role="exclusive_game" Type="Self.exclusive_game" Multiplicity="1" />
+          <End Role="game" Type="Self.game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="exclusive_game">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game">
+              <PropertyRef Name="id_exclusive" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_game_game_category">
+          <End Role="game_category" Type="Self.game_category" Multiplicity="1" />
+          <End Role="game" Type="Self.game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game_category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_game_game_genre">
+          <End Role="game_genre" Type="Self.game_genre" Multiplicity="1" />
+          <End Role="game" Type="Self.game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game_genre">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game">
+              <PropertyRef Name="id_genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_game_game_thematic">
+          <End Role="game_thematic" Type="Self.game_thematic" Multiplicity="1" />
+          <End Role="game" Type="Self.game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game_thematic">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="game">
+              <PropertyRef Name="id_thematics" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tournament_game">
+          <End Role="game" Type="Self.game" Multiplicity="0..1" />
+          <End Role="tournament" Type="Self.tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tournament">
+              <PropertyRef Name="id_game" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_players_of_game_library_User_data">
+          <End Role="User_data" Type="Self.User_data" Multiplicity="1" />
+          <End Role="players_of_game_library" Type="Self.players_of_game_library" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_of_game_library">
+              <PropertyRef Name="id_user_data" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_players_of_tournament_status">
+          <End Role="status" Type="Self.status" Multiplicity="1" />
+          <End Role="players_of_tournament" Type="Self.players_of_tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_of_tournament">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_players_of_tournament_tournament">
+          <End Role="tournament" Type="Self.tournament" Multiplicity="1" />
+          <End Role="players_of_tournament" Type="Self.players_of_tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournament">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_of_tournament">
+              <PropertyRef Name="id_tournament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_players_of_tournament_User_data">
+          <End Role="User_data" Type="Self.User_data" Multiplicity="1" />
+          <End Role="players_of_tournament" Type="Self.players_of_tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_of_tournament">
+              <PropertyRef Name="id_user_data" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tournament_User_data">
+          <End Role="User_data" Type="Self.User_data" Multiplicity="0..1" />
+          <End Role="tournament" Type="Self.tournament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_data">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tournament">
+              <PropertyRef Name="id_userData" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Gaming_clubEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="date_of_game_library" EntityType="Self.date_of_game_library" />
+          <EntitySet Name="exclusive_game" EntityType="Self.exclusive_game" />
+          <EntitySet Name="games" EntityType="Self.game" />
+          <EntitySet Name="game_category" EntityType="Self.game_category" />
+          <EntitySet Name="game_genre" EntityType="Self.game_genre" />
+          <EntitySet Name="game_thematic" EntityType="Self.game_thematic" />
+          <EntitySet Name="players_of_game_library" EntityType="Self.players_of_game_library" />
+          <EntitySet Name="players_of_tournament" EntityType="Self.players_of_tournament" />
+          <EntitySet Name="status" EntityType="Self.status" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tournaments" EntityType="Self.tournament" />
+          <EntitySet Name="User_data" EntityType="Self.User_data" />
+          <AssociationSet Name="FK_date_of_game_library_game" Association="Self.FK_date_of_game_library_game">
+            <End Role="game" EntitySet="games" />
+            <End Role="date_of_game_library" EntitySet="date_of_game_library" />
+          </AssociationSet>
+          <AssociationSet Name="FK_date_of_game_library_responsible" Association="Self.FK_date_of_game_library_responsible">
+            <End Role="User_data" EntitySet="User_data" />
+            <End Role="date_of_game_library" EntitySet="date_of_game_library" />
+          </AssociationSet>
+          <AssociationSet Name="FK_players_of_game_library_date_of_game_library" Association="Self.FK_players_of_game_library_date_of_game_library">
+            <End Role="date_of_game_library" EntitySet="date_of_game_library" />
+            <End Role="players_of_game_library" EntitySet="players_of_game_library" />
+          </AssociationSet>
+          <AssociationSet Name="FK_game_exclusive_game" Association="Self.FK_game_exclusive_game">
+            <End Role="exclusive_game" EntitySet="exclusive_game" />
+            <End Role="game" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_game_game_category" Association="Self.FK_game_game_category">
+            <End Role="game_category" EntitySet="game_category" />
+            <End Role="game" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_game_game_genre" Association="Self.FK_game_game_genre">
+            <End Role="game_genre" EntitySet="game_genre" />
+            <End Role="game" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_game_game_thematic" Association="Self.FK_game_game_thematic">
+            <End Role="game_thematic" EntitySet="game_thematic" />
+            <End Role="game" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tournament_game" Association="Self.FK_tournament_game">
+            <End Role="game" EntitySet="games" />
+            <End Role="tournament" EntitySet="tournaments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_players_of_game_library_User_data" Association="Self.FK_players_of_game_library_User_data">
+            <End Role="User_data" EntitySet="User_data" />
+            <End Role="players_of_game_library" EntitySet="players_of_game_library" />
+          </AssociationSet>
+          <AssociationSet Name="FK_players_of_tournament_status" Association="Self.FK_players_of_tournament_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="players_of_tournament" EntitySet="players_of_tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK_players_of_tournament_tournament" Association="Self.FK_players_of_tournament_tournament">
+            <End Role="tournament" EntitySet="tournaments" />
+            <End Role="players_of_tournament" EntitySet="players_of_tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK_players_of_tournament_User_data" Association="Self.FK_players_of_tournament_User_data">
+            <End Role="User_data" EntitySet="User_data" />
+            <End Role="players_of_tournament" EntitySet="players_of_tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tournament_User_data" Association="Self.FK_tournament_User_data">
+            <End Role="User_data" EntitySet="User_data" />
+            <End Role="tournament" EntitySet="tournaments" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Gaming_clubModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Gaming_clubModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Gaming_clubModelContainer" CdmEntityContainer="Gaming_clubEntities">
+          <EntitySetMapping Name="date_of_game_library">
+            <EntityTypeMapping TypeName="Gaming_clubModel.date_of_game_library">
+              <MappingFragment StoreEntitySet="date_of_game_library">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_game" ColumnName="id_game" />
+                <ScalarProperty Name="id_UserData" ColumnName="id_UserData" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="min_number_of_palyers" ColumnName="min_number_of_palyers" />
+                <ScalarProperty Name="max_number_of_palyers" ColumnName="max_number_of_palyers" />
+                <ScalarProperty Name="min_age" ColumnName="min_age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="exclusive_game">
+            <EntityTypeMapping TypeName="Gaming_clubModel.exclusive_game">
+              <MappingFragment StoreEntitySet="exclusive_game">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="exclusive" ColumnName="exclusive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="games">
+            <EntityTypeMapping TypeName="Gaming_clubModel.game">
+              <MappingFragment StoreEntitySet="game">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id_genre" ColumnName="id_genre" />
+                <ScalarProperty Name="id_thematics" ColumnName="id_thematics" />
+                <ScalarProperty Name="age_limit" ColumnName="age_limit" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="id_exclusive" ColumnName="id_exclusive" />
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="game_category">
+            <EntityTypeMapping TypeName="Gaming_clubModel.game_category">
+              <MappingFragment StoreEntitySet="game_category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="category" ColumnName="category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="game_genre">
+            <EntityTypeMapping TypeName="Gaming_clubModel.game_genre">
+              <MappingFragment StoreEntitySet="game_genre">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="game_thematic">
+            <EntityTypeMapping TypeName="Gaming_clubModel.game_thematic">
+              <MappingFragment StoreEntitySet="game_thematic">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="thematic" ColumnName="thematic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="players_of_game_library">
+            <EntityTypeMapping TypeName="Gaming_clubModel.players_of_game_library">
+              <MappingFragment StoreEntitySet="players_of_game_library">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_game_library" ColumnName="id_game_library" />
+                <ScalarProperty Name="id_user_data" ColumnName="id_user_data" />
+                <ScalarProperty Name="age" ColumnName="age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="players_of_tournament">
+            <EntityTypeMapping TypeName="Gaming_clubModel.players_of_tournament">
+              <MappingFragment StoreEntitySet="players_of_tournament">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_tournament" ColumnName="id_tournament" />
+                <ScalarProperty Name="id_user_data" ColumnName="id_user_data" />
+                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="Gaming_clubModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status1" ColumnName="status" />
+                <ScalarProperty Name="status_description" ColumnName="status_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Gaming_clubModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tournaments">
+            <EntityTypeMapping TypeName="Gaming_clubModel.tournament">
+              <MappingFragment StoreEntitySet="tournament">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_game" ColumnName="id_game" />
+                <ScalarProperty Name="id_userData" ColumnName="id_userData" />
+                <ScalarProperty Name="date_of_tournament" ColumnName="date_of_tournament" />
+                <ScalarProperty Name="min_age" ColumnName="min_age" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_data">
+            <EntityTypeMapping TypeName="Gaming_clubModel.User_data">
+              <MappingFragment StoreEntitySet="User_data">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patrrynumic" ColumnName="patrrynumic" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="permission" ColumnName="permission" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище Gaming_clubModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище Gaming_clubModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище Gaming_clubModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище Gaming_clubModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gaming_clubModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище Gaming_clubModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gaming_clubModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище Gaming_clubModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище Gaming_clubModel.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
