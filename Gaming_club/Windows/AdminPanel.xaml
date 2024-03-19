@@ -119,12 +119,35 @@
                            RenderTransformOrigin="0.276,0.233" Width="120"/>
                     <Button Name="btnAddGameLibrary" 
                             Content="Добавить в таблицу день игротеки" 
-                            HorizontalAlignment="Left" Margin="10,352,0,0" 
+                            HorizontalAlignment="Left" Margin="10,434,0,0" 
                             VerticalAlignment="Top" RenderTransformOrigin="0.202,0.086" 
                             Width="222" Click="btnAddGameLibrary_Click"/>
                     <Label Content="Заполнение таблицы турниры" HorizontalAlignment="Center" Height="47" Margin="0,523,0,0" 
                         VerticalAlignment="Top" Width="330" FontSize="20" 
                         FontFamily="Segoe UI Black"/>
+                    <TextBox x:Name="txtMinAge" HorizontalAlignment="Left"
+                        Margin="306,218,0,0" TextWrapping="Wrap" 
+                        Text="" VerticalAlignment="Top" Width="61"
+                        MaxLength="2"/>
+                    <Label Content="Минимальный возраст участников:" 
+                        HorizontalAlignment="Left" Margin="306,187,0,0" 
+                        VerticalAlignment="Top" Width="224"/>
+                    <TextBox x:Name="txtGameLibraryTitle" HorizontalAlignment="Left"
+                        Margin="306,267,0,0" TextWrapping="Wrap" 
+                        Text="" VerticalAlignment="Top" Width="188"
+                        MaxLength="50"/>
+                    <Label Content="Название игротеки" 
+                        HorizontalAlignment="Left" Margin="306,236,0,0" 
+                        VerticalAlignment="Top" Width="224"/>
+                    <TextBox x:Name="txtGameLibraryDescription" HorizontalAlignment="Left"
+                        Margin="306,319,0,0" TextWrapping="Wrap" 
+                        Text="" VerticalAlignment="Top" Width="538"
+                        MaxLength="150" Height="113" 
+                        RenderTransformOrigin="0.66,0.576"/>
+                    <Label Content="Описание игротеки" 
+                        HorizontalAlignment="Left"
+                        Margin="306,290,0,0" 
+                        VerticalAlignment="Top" Width="224"/>
                 </Grid>
 
                 <Grid Height="675" Width="960" VerticalAlignment="Top" 

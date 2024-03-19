@@ -11,13 +11,13 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_game" Type="int" Nullable="false" />
-          <Property Name="id_UserData" Type="int" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="50" />
           <Property Name="description" Type="nvarchar" MaxLength="200" />
           <Property Name="start_date" Type="datetime" />
           <Property Name="min_number_of_palyers" Type="int" />
           <Property Name="max_number_of_palyers" Type="int" />
           <Property Name="min_age" Type="int" />
+          <Property Name="id_user_data" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="exclusive_game">
           <Key>
@@ -139,7 +139,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_date_of_game_library_responsible">
+        <Association Name="FK_date_of_game_library_User_data">
           <End Role="User_data" Type="Self.User_data" Multiplicity="1" />
           <End Role="date_of_game_library" Type="Self.date_of_game_library" Multiplicity="*" />
           <ReferentialConstraint>
@@ -147,7 +147,7 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="date_of_game_library">
-              <PropertyRef Name="id_UserData" />
+              <PropertyRef Name="id_user_data" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -331,7 +331,7 @@
             <End Role="game" EntitySet="game" />
             <End Role="date_of_game_library" EntitySet="date_of_game_library" />
           </AssociationSet>
-          <AssociationSet Name="FK_date_of_game_library_responsible" Association="Self.FK_date_of_game_library_responsible">
+          <AssociationSet Name="FK_date_of_game_library_User_data" Association="Self.FK_date_of_game_library_User_data">
             <End Role="User_data" EntitySet="User_data" />
             <End Role="date_of_game_library" EntitySet="date_of_game_library" />
           </AssociationSet>
@@ -391,15 +391,15 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_game" Type="Int32" Nullable="false" />
-          <Property Name="id_UserData" Type="Int32" Nullable="false" />
           <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="start_date" Type="DateTime" Precision="3" />
           <Property Name="min_number_of_palyers" Type="Int32" />
           <Property Name="max_number_of_palyers" Type="Int32" />
           <Property Name="min_age" Type="Int32" />
+          <Property Name="id_user_data" Type="Int32" Nullable="false" />
           <NavigationProperty Name="game" Relationship="Self.FK_date_of_game_library_game" FromRole="date_of_game_library" ToRole="game" />
-          <NavigationProperty Name="User_data" Relationship="Self.FK_date_of_game_library_responsible" FromRole="date_of_game_library" ToRole="User_data" />
+          <NavigationProperty Name="User_data" Relationship="Self.FK_date_of_game_library_User_data" FromRole="date_of_game_library" ToRole="User_data" />
           <NavigationProperty Name="players_of_game_library" Relationship="Self.FK_players_of_game_library_date_of_game_library" FromRole="date_of_game_library" ToRole="players_of_game_library" />
         </EntityType>
         <EntityType Name="exclusive_game">
@@ -528,7 +528,7 @@
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="age" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="date_of_game_library" Relationship="Self.FK_date_of_game_library_responsible" FromRole="User_data" ToRole="date_of_game_library" />
+          <NavigationProperty Name="date_of_game_library" Relationship="Self.FK_date_of_game_library_User_data" FromRole="User_data" ToRole="date_of_game_library" />
           <NavigationProperty Name="players_of_game_library" Relationship="Self.FK_players_of_game_library_User_data" FromRole="User_data" ToRole="players_of_game_library" />
           <NavigationProperty Name="players_of_tournament" Relationship="Self.FK_players_of_tournament_User_data" FromRole="User_data" ToRole="players_of_tournament" />
           <NavigationProperty Name="tournaments" Relationship="Self.FK_tournament_User_data" FromRole="User_data" ToRole="tournament" />
@@ -545,7 +545,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_date_of_game_library_responsible">
+        <Association Name="FK_date_of_game_library_User_data">
           <End Role="User_data" Type="Self.User_data" Multiplicity="1" />
           <End Role="date_of_game_library" Type="Self.date_of_game_library" Multiplicity="*" />
           <ReferentialConstraint>
@@ -553,7 +553,7 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="date_of_game_library">
-              <PropertyRef Name="id_UserData" />
+              <PropertyRef Name="id_user_data" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -706,7 +706,7 @@
             <End Role="game" EntitySet="games" />
             <End Role="date_of_game_library" EntitySet="date_of_game_library" />
           </AssociationSet>
-          <AssociationSet Name="FK_date_of_game_library_responsible" Association="Self.FK_date_of_game_library_responsible">
+          <AssociationSet Name="FK_date_of_game_library_User_data" Association="Self.FK_date_of_game_library_User_data">
             <End Role="User_data" EntitySet="User_data" />
             <End Role="date_of_game_library" EntitySet="date_of_game_library" />
           </AssociationSet>
@@ -807,13 +807,13 @@
               <MappingFragment StoreEntitySet="date_of_game_library">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_game" ColumnName="id_game" />
-                <ScalarProperty Name="id_UserData" ColumnName="id_UserData" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="min_number_of_palyers" ColumnName="min_number_of_palyers" />
                 <ScalarProperty Name="max_number_of_palyers" ColumnName="max_number_of_palyers" />
                 <ScalarProperty Name="min_age" ColumnName="min_age" />
+                <ScalarProperty Name="id_user_data" ColumnName="id_user_data" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

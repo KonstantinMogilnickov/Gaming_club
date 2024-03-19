@@ -124,6 +124,7 @@ namespace Gaming_club.Windows
                     id_exclusive = ((exclusive_game)cmbExclusiveGame.SelectedItem).id,
                     id_category = ((game_category)cmbGameCategory.SelectedItem).id,
                     price = txtPrice.Text.Trim(),
+                    
                 };
 
                 db.games.Add(game);
@@ -191,10 +192,17 @@ namespace Gaming_club.Windows
             if (listBoxUser.SelectedItem != null)
             {
                 User_data selectedUser = (User_data)listBoxUser.SelectedItem;
-                selectedUser.permission = 1;//Разблокировка пользователя
-                db.SaveChanges();
-                MessageBox.Show("Пользователь разблокирован.");
-                LoadUser(); // обновление списка пользователей
+                if(selectedUser.permission == 2)
+                {
+                    MessageBox.Show("Вы не можете это сделать!");
+                }
+                else
+                {
+                    selectedUser.permission = 1;//Разблокировка пользователя
+                    db.SaveChanges();
+                    MessageBox.Show("Пользователь разблокирован.");
+                    LoadUser(); // обновление списка пользователей
+                }
             }
             else
             {
@@ -207,10 +215,18 @@ namespace Gaming_club.Windows
             if (listBoxUser.SelectedItem != null)
             {
                 User_data selectedUser = (User_data)listBoxUser.SelectedItem;
-                selectedUser.permission = 0; //Блокировка пользователя
-                db.SaveChanges();
-                MessageBox.Show("Пользователь заблокирован.");
-                LoadUser(); // обновление списка пользователей
+                if (selectedUser.permission == 2)
+                {
+                    MessageBox.Show("Вы не можете заблокировать администратора!");
+                }
+
+                else
+                {
+                    selectedUser.permission = 0; //Блокировка пользователя
+                    db.SaveChanges();
+                    MessageBox.Show("Пользователь заблокирован.");
+                    LoadUser(); // обновление списка пользователей
+                }
             }
             else
             {
@@ -232,11 +248,19 @@ namespace Gaming_club.Windows
             if(listBoxUser.SelectedItems != null)
             {
                 User_data selectedUser = (User_data)listBoxUser.SelectedItem;
-                db.User_data.Remove(selectedUser);
-                MessageBox.Show("Пользователь удален");
-                db.SaveChanges();
-                LoadUser();
+                if(selectedUser.permission == 2)
+                {
+                    MessageBox.Show("Вы не можете удалить администратора!");
+                }
+                else
+                {
+                    db.User_data.Remove(selectedUser);
+                    MessageBox.Show("Пользователь удален");
+                    db.SaveChanges();
+                    LoadUser();
+                }     
             }
+
 
             else
             {
@@ -270,7 +294,10 @@ namespace Gaming_club.Windows
                     start_date = dpDateGameLibrary.DisplayDate,
                     min_number_of_palyers = Convert.ToInt32(txtMinPlayers.Text.Trim()),
                     max_number_of_palyers = Convert.ToInt32(txtMaxPlayers.Text.Trim()),
-                    id_UserData = ((User_data)cmbAddMaster.SelectedItem).id,
+                    id_user_data = ((User_data)cmbAddMaster.SelectedItem).id,
+                    min_age = Convert.ToInt32(txtMinAge.Text.Trim()),
+                    title = txtGameLibraryTitle.Text.Trim(),
+                    description = txtGameLibraryDescription.Text.Trim(),
                 };
                 db.date_of_game_library.Add(gameLibrary);
                 db.SaveChanges();

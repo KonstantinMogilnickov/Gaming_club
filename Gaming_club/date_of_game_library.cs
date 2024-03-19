@@ -22,13 +22,13 @@ namespace Gaming_club
     
         public int id { get; set; }
         public int id_game { get; set; }
-        public int id_UserData { get; set; }
         public string title { get; set; }
         public string description { get; set; }
         public Nullable<System.DateTime> start_date { get; set; }
         public Nullable<int> min_number_of_palyers { get; set; }
         public Nullable<int> max_number_of_palyers { get; set; }
         public Nullable<int> min_age { get; set; }
+        public int id_user_data { get; set; }
     
         public virtual game game { get; set; }
         public virtual User_data User_data { get; set; }

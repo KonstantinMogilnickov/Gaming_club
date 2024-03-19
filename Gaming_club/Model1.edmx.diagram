@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a41a1ccd919240c88973a415ae0895ed" Name="Diagram1" ZoomLevel="78">
+      <Diagram DiagramId="314995a5391e451e8e6d71bb17e3cea3" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="Gaming_clubModel.date_of_game_library" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Gaming_clubModel.exclusive_game" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="Gaming_clubModel.game" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="Gaming_clubModel.tournament" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Gaming_clubModel.User_data" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
         <AssociationConnector Association="Gaming_clubModel.FK_date_of_game_library_game" ManuallyRouted="false" />
-        <AssociationConnector Association="Gaming_clubModel.FK_date_of_game_library_responsible" ManuallyRouted="false" />
+        <AssociationConnector Association="Gaming_clubModel.FK_date_of_game_library_User_data" ManuallyRouted="false" />
         <AssociationConnector Association="Gaming_clubModel.FK_players_of_game_library_date_of_game_library" ManuallyRouted="false" />
         <AssociationConnector Association="Gaming_clubModel.FK_game_exclusive_game" ManuallyRouted="false" />
         <AssociationConnector Association="Gaming_clubModel.FK_game_game_category" ManuallyRouted="false" />
