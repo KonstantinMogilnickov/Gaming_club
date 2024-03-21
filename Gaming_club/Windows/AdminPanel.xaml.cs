@@ -1,20 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using Gaming_club.classes;
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Path = System.IO.Path;
 
 namespace Gaming_club.Windows
 {
@@ -22,6 +12,7 @@ namespace Gaming_club.Windows
     {
         Gaming_clubEntities db = new Gaming_clubEntities();
         private game game;
+        private string sourceImage;
         public AdminPanel()
         {
             InitializeComponent();
@@ -54,12 +45,9 @@ namespace Gaming_club.Windows
                 BitmapImage newBitmapImage = new BitmapImage(new Uri(imagePath));
                 profileImage.Source = newBitmapImage;
 
-                // Создаем объект игры и устанавливаем путь к изображению
-                game = new game();
-                game.image = imagePath;
+                sourceImage = ImageHelper.SaveImage(imagePath, profileImage.Source, AppDomain.CurrentDomain.BaseDirectory, "GamesImage", $"game_{game.id}");
             }
         }
-
 
         private void FillComboboxGenre()
         {
@@ -120,17 +108,15 @@ namespace Gaming_club.Windows
                     id_genre = ((game_genre)cmbGenre.SelectedItem).id,
                     id_thematics = ((game_thematic)cmbGameThematick.SelectedItem).id,
                     age_limit = Convert.ToInt32(txtAgeLimit.Text.Trim()),
-                    image = SaveProfileImage(),
                     id_exclusive = ((exclusive_game)cmbExclusiveGame.SelectedItem).id,
                     id_category = ((game_category)cmbGameCategory.SelectedItem).id,
                     price = txtPrice.Text.Trim(),
-                    
+                    image = sourceImage,
                 };
 
                 db.games.Add(game);
                 db.SaveChanges();
             }
-        
             catch (DbEntityValidationException ex)
             {
                 foreach (var validationErrors in ex.EntityValidationErrors)
@@ -141,32 +127,6 @@ namespace Gaming_club.Windows
                     }
                 }
             }
-        }
-
-
-        private string SaveProfileImage()
-        {
-            string imagesDirectory = "GamesImage";
-            string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imagesDirectory);
-
-            if (!Directory.Exists(directoryPath))
-            {
-                Directory.CreateDirectory(directoryPath);
-            }
-
-            string fileName = $"{game.id}_game_image.jpg";
-            string filePath = Path.Combine(directoryPath, fileName);
-
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                BitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create((BitmapImage)profileImage.Source));
-                encoder.Save(memoryStream);
-
-                File.WriteAllBytes(filePath, memoryStream.ToArray());
-            }
-
-            return filePath;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

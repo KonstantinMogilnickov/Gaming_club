@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="classes\ImageHelper.cs" />
     <Compile Include="classes\RegistrationUser.cs" />
     <Compile Include="date_of_game_library.cs">
       <DependentUpon>Model1.tt</DependentUpon>
