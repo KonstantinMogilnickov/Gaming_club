@@ -73,7 +73,9 @@
                 </Grid>
                 <Grid Height="1199" Width="943" VerticalAlignment="Top" 
                   HorizontalAlignment="Right" Background="AntiqueWhite">
-                    <Label Content="Заполнение таблицы игротек" HorizontalAlignment="Center" Height="47" Margin="0,10,0,0" 
+                    <Label Content="Заполнение таблицы игротек" 
+                           HorizontalAlignment="Center" Height="47" 
+                           Margin="0,10,0,0" 
                            VerticalAlignment="Top" Width="330" FontSize="20" 
                            FontFamily="Segoe UI Black"/>
                     <ComboBox Name="cmbGame" HorizontalAlignment="Left" 
@@ -122,7 +124,9 @@
                             HorizontalAlignment="Left" Margin="10,434,0,0" 
                             VerticalAlignment="Top" RenderTransformOrigin="0.202,0.086" 
                             Width="222" Click="btnAddGameLibrary_Click"/>
-                    <Label Content="Заполнение таблицы турниры" HorizontalAlignment="Center" Height="47" Margin="0,523,0,0" 
+                    <Label Content="Заполнение таблицы турниры" 
+                           HorizontalAlignment="Center" 
+                           Height="47" Margin="0,523,0,0" 
                         VerticalAlignment="Top" Width="330" FontSize="20" 
                         FontFamily="Segoe UI Black"/>
                     <TextBox x:Name="txtMinAge" HorizontalAlignment="Left"
@@ -148,6 +152,57 @@
                         HorizontalAlignment="Left"
                         Margin="306,290,0,0" 
                         VerticalAlignment="Top" Width="224"/>
+
+                    <ComboBox Name="cmbTourGame" HorizontalAlignment="Left" 
+                              Margin="12,600,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Выбрать игру "
+                           HorizontalAlignment="Left" Height="31"
+                           Margin="12,564,0,0" VerticalAlignment="Top"
+                           Width="109"/>
+                    <ComboBox Name="cmbTourMaster" HorizontalAlignment="Left"
+                              Margin="12,662,0,0" 
+                              VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Выбрать мастера" HorizontalAlignment="Left"
+                           Height="30" Margin="12,627,0,0"
+                           VerticalAlignment="Top" Width="120"/>
+                    <DatePicker Name="dpTourDate" HorizontalAlignment="Left" 
+                                Margin="17,702,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtTourMinAge" 
+                             HorizontalAlignment="Left" Margin="17,761,0,0" 
+                             TextWrapping="Wrap" Text="" 
+                             VerticalAlignment="Top" Width="120"
+                             MaxLength="2"/>
+                    <Label Content="Минимальный возраст" 
+                           HorizontalAlignment="Left" Margin="17,731,0,0" 
+                           VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtTourPrice" HorizontalAlignment="Left"
+                             Margin="17,806,0,0" TextWrapping="Wrap" 
+                             Text="" VerticalAlignment="Top" 
+                             Width="120"/>
+                    <Label Content="Цена" HorizontalAlignment="Left" 
+                           Margin="17,779,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="txtTourTitle" HorizontalAlignment="Left" 
+                             Height="39" Margin="17,862,0,0" 
+                             TextWrapping="Wrap" Text="" 
+                             VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Название турнира " 
+                           HorizontalAlignment="Left" Margin="17,829,0,0" 
+                           VerticalAlignment="Top" 
+                           RenderTransformOrigin="-0.079,0.733"/>
+                    <TextBox Name="txtTourDescr" HorizontalAlignment="Left" 
+                             Height="113" Margin="17,947,0,0" 
+                             TextWrapping="Wrap" Text="" 
+                             VerticalAlignment="Top" Width="350"/>
+                    <Label Content="Описание турнира" 
+                           HorizontalAlignment="Left" Height="36"
+                           Margin="17,906,0,0" VerticalAlignment="Top"
+                           Width="120"/>
+                    <Button x:Name="btnAddTournament" Content="Добавить турнир"
+                            HorizontalAlignment="Left" Height="44"
+                            Margin="17,1065,0,0" VerticalAlignment="Top" 
+                            Width="350" Click="btnAddTournament_Click"/>
+
+
                 </Grid>
 
                 <Grid Height="675" Width="960" VerticalAlignment="Top" 
@@ -203,9 +258,5 @@
 
             </Grid>
         </ScrollViewer>
-
-
-
-
     </Grid>
 </Window>

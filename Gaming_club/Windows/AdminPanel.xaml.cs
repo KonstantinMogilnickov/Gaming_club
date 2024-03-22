@@ -17,12 +17,7 @@ namespace Gaming_club.Windows
         {
             InitializeComponent();
 
-            FillComboboxGenre();
-            FillComboBoxCategory();
-            FillComboBoxThematics();
-            FillComboBoxGameExclusive();
-            FillComboBoxGame();
-            FillComboBoxResponsible();
+            FillComboBox();
             LoadUser();
         }
 
@@ -40,7 +35,6 @@ namespace Gaming_club.Windows
                     bitmapImage.StreamSource?.Close(); // Закрываем поток, если он был открыт
                     bitmapImage = null; // Очищаем ссылку на объект BitmapImage
                 }
-
                 // Загружаем новое изображение
                 BitmapImage newBitmapImage = new BitmapImage(new Uri(imagePath));
                 profileImage.Source = newBitmapImage;
@@ -49,18 +43,42 @@ namespace Gaming_club.Windows
             }
         }
 
+        private void FillComboBox()
+        {
+            FillComboboxGenre();
+            FillComboBoxCategory();
+            FillComboBoxThematics();
+            FillComboBoxGameExclusive();
+            FillComboBoxGame();
+            FillComboBoxResponsible();
+            FillComboBoxTourGame();
+            FillComboBoxTourMaster();
+        }
+
+        private void FillComboBoxTourMaster()
+        {
+            User_data user_Data = new User_data();
+            var masters = db.User_data.Where(user => user.permission == 3).ToList();
+            cmbTourMaster.ItemsSource = masters;
+            cmbTourMaster.DisplayMemberPath = "name";
+        }
+
+        private void FillComboBoxTourGame()
+        {
+            var games = db.games.ToList();
+            cmbTourGame.ItemsSource = games;
+            cmbTourGame.DisplayMemberPath = "title";
+        }
+
         private void FillComboboxGenre()
         {
-            game_genre game_Genre = new game_genre();
             var genres = db.game_genre.ToList();
             cmbGenre.ItemsSource = genres;
             cmbGenre.DisplayMemberPath = "genre";
-
         }
 
         private void FillComboBoxCategory()
         {
-            game_category game_Category = new game_category();
             var category = db.game_category.ToList();
             cmbGameCategory.ItemsSource = category;
             cmbGameCategory.DisplayMemberPath = "category";
@@ -68,7 +86,6 @@ namespace Gaming_club.Windows
 
         private void FillComboBoxThematics()
         {
-            game_thematic game_Thematic = new game_thematic();
             var thematicks = db.game_thematic.ToList();
             cmbGameThematick.ItemsSource = thematicks;
             cmbGameThematick.DisplayMemberPath = "thematic";
@@ -76,7 +93,6 @@ namespace Gaming_club.Windows
 
         private void FillComboBoxGameExclusive()
         {
-            exclusive_game exclusive = new exclusive_game();
             var exclusive_Games = db.exclusive_game.ToList();
             cmbExclusiveGame.ItemsSource = exclusive_Games;
             cmbExclusiveGame.DisplayMemberPath = "exclusive";
@@ -84,7 +100,6 @@ namespace Gaming_club.Windows
 
         private void FillComboBoxGame()
         {
-            game game = new game();
             var games = db.games.ToList();
             cmbGame.ItemsSource = games;
             cmbGame.DisplayMemberPath = "title";
@@ -194,8 +209,6 @@ namespace Gaming_club.Windows
             }
         }
 
-
-
         private void btnBackAuth_Click(object sender, RoutedEventArgs e)
         {
            MainWindow mainWindow = new MainWindow();
@@ -262,9 +275,34 @@ namespace Gaming_club.Windows
                 db.date_of_game_library.Add(gameLibrary);
                 db.SaveChanges();
             }
-            catch
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
+        private void btnAddTournament_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                tournament tournament = new tournament()
+                {
+                    id_game = ((game)cmbTourGame.SelectedItem).id,
+                    id_userData = ((User_data)cmbTourMaster.SelectedItem).id,
+                    date_of_tournament = dpTourDate.DisplayDate,
+                    min_age = Convert.ToInt32(txtTourMinAge.Text.Trim()),
+                    price = Convert.ToInt32(txtTourPrice.Text.Trim()),
+                    title = txtTourTitle.Text.Trim(),
+                    description = txtTourDescr.Text.Trim(),
+                };
+
+                db.tournaments.Add(tournament);
+                db.SaveChanges();
+                MessageBox.Show("Данные о турнире успешно добавлены!");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
