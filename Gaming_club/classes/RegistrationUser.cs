@@ -58,7 +58,7 @@ namespace Gaming_club.classes
                         surname = surname,
                         patrrynumic = patrynumic,
                         phone_number = phoneNumber,
-                        permission = permission,
+                        id_permission = permission,
                         login = login,
                         password = password,
                         age = age,

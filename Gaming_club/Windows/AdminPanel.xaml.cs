@@ -11,7 +11,6 @@ namespace Gaming_club.Windows
     public partial class AdminPanel : Window
     {
         Gaming_clubEntities db = new Gaming_clubEntities();
-        private game game;
         private string sourceImage;
         public AdminPanel()
         {
@@ -23,23 +22,31 @@ namespace Gaming_club.Windows
 
         private void editImageBtn_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png; *.gif)|*.jpg; *.jpeg; *.png; *.gif|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
+            Random random = new Random();
+            int randomNumber = random.Next(100000, 999999);
+            try
             {
-                string imagePath = openFileDialog.FileName;
-
-                // Закрываем ресурсы текущего изображения, если они есть
-                if (profileImage.Source is BitmapImage bitmapImage)
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png; *.gif)|*.jpg; *.jpeg; *.png; *.gif|All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == true)
                 {
-                    bitmapImage.StreamSource?.Close(); // Закрываем поток, если он был открыт
-                    bitmapImage = null; // Очищаем ссылку на объект BitmapImage
-                }
-                // Загружаем новое изображение
-                BitmapImage newBitmapImage = new BitmapImage(new Uri(imagePath));
-                profileImage.Source = newBitmapImage;
+                    string imagePath = openFileDialog.FileName;
 
-                sourceImage = ImageHelper.SaveImage(imagePath, profileImage.Source, AppDomain.CurrentDomain.BaseDirectory, "GamesImage", $"game_{game.id}");
+                    // Закрываем ресурсы текущего изображения, если они есть
+                    if (profileImage.Source is BitmapImage bitmapImage)
+                    {
+                        bitmapImage.StreamSource?.Close(); // Закрываем поток, если он был открыт
+                        bitmapImage = null; // Очищаем ссылку на объект BitmapImage
+                    }
+                    // Загружаем новое изображение
+                    BitmapImage newBitmapImage = new BitmapImage(new Uri(imagePath));
+                    profileImage.Source = newBitmapImage;
+                    sourceImage = ImageHelper.SaveImage(imagePath, profileImage.Source, AppDomain.CurrentDomain.BaseDirectory, "GamesImage", $"game_{randomNumber.ToString()}");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -58,7 +65,7 @@ namespace Gaming_club.Windows
         private void FillComboBoxTourMaster()
         {
             User_data user_Data = new User_data();
-            var masters = db.User_data.Where(user => user.permission == 3).ToList();
+            var masters = db.User_data.Where(user => user.id_permission == 3).ToList();
             cmbTourMaster.ItemsSource = masters;
             cmbTourMaster.DisplayMemberPath = "name";
         }
@@ -108,7 +115,7 @@ namespace Gaming_club.Windows
         private void FillComboBoxResponsible()
         {
             User_data user_Data = new User_data();
-            var masters = db.User_data.Where(user => user.permission == 3).ToList();
+            var masters = db.User_data.Where(user => user.id_permission == 3).ToList();
             cmbAddMaster.ItemsSource = masters;
         }
 
@@ -131,6 +138,7 @@ namespace Gaming_club.Windows
 
                 db.games.Add(game);
                 db.SaveChanges();
+                MessageBox.Show("Игра добавлена!");
             }
             catch (DbEntityValidationException ex)
             {
@@ -167,13 +175,13 @@ namespace Gaming_club.Windows
             if (listBoxUser.SelectedItem != null)
             {
                 User_data selectedUser = (User_data)listBoxUser.SelectedItem;
-                if(selectedUser.permission == 2)
+                if(selectedUser.id_permission == 2)
                 {
                     MessageBox.Show("Вы не можете это сделать!");
                 }
                 else
                 {
-                    selectedUser.permission = 1;//Разблокировка пользователя
+                    selectedUser.id_permission = 1;//Разблокировка пользователя
                     db.SaveChanges();
                     MessageBox.Show("Пользователь разблокирован.");
                     LoadUser(); // обновление списка пользователей
@@ -190,14 +198,14 @@ namespace Gaming_club.Windows
             if (listBoxUser.SelectedItem != null)
             {
                 User_data selectedUser = (User_data)listBoxUser.SelectedItem;
-                if (selectedUser.permission == 2)
+                if (selectedUser.id_permission == 2)
                 {
                     MessageBox.Show("Вы не можете заблокировать администратора!");
                 }
 
                 else
                 {
-                    selectedUser.permission = 0; //Блокировка пользователя
+                    selectedUser.id_permission = 0; //Блокировка пользователя
                     db.SaveChanges();
                     MessageBox.Show("Пользователь заблокирован.");
                     LoadUser(); // обновление списка пользователей
@@ -221,7 +229,7 @@ namespace Gaming_club.Windows
             if(listBoxUser.SelectedItems != null)
             {
                 User_data selectedUser = (User_data)listBoxUser.SelectedItem;
-                if(selectedUser.permission == 2)
+                if(selectedUser.id_permission == 2)
                 {
                     MessageBox.Show("Вы не можете удалить администратора!");
                 }
@@ -246,9 +254,10 @@ namespace Gaming_club.Windows
             if(listBoxUser.SelectedItems != null)
             {
                 User_data selectedUser = (User_data)listBoxUser.SelectedItem;
-                selectedUser.permission = 3;
+                selectedUser.id_permission = 3;
                 db.SaveChanges();
                 LoadUser();
+                MessageBox.Show("Мастер добавлен!");
             }
 
             else
@@ -274,6 +283,7 @@ namespace Gaming_club.Windows
                 };
                 db.date_of_game_library.Add(gameLibrary);
                 db.SaveChanges();
+                MessageBox.Show("Игротека добавлена!");
             }
             catch(Exception ex)
             {
@@ -303,6 +313,21 @@ namespace Gaming_club.Windows
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Вы точно хотите выйти?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            // Проверяем, что пользователь выбрал "да"
+            if (result == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                Application.Current.Shutdown();
             }
         }
     }

@@ -24,6 +24,7 @@ namespace Gaming_club.Windows
             InitializeComponent();
             _data = user;
             FillUserData();
+            LoadGameLibrary();
         }
 
         private void FillUserData()
@@ -117,6 +118,7 @@ namespace Gaming_club.Windows
             if (gridCabinet.Visibility == Visibility.Hidden)
             {
                 gridCabinet.Visibility = Visibility.Visible;
+                gridGameLibrary.Visibility = Visibility.Hidden;
             }
 
             else
@@ -127,53 +129,71 @@ namespace Gaming_club.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"Добро пожаловать {_data.name}");
+            var role = db.roles.FirstOrDefault(r => r.id == _data.id_permission);
+            MessageBox.Show($"Добро пожаловать {_data.name} {_data.surname}!\n \nВаша роль: {role.permission}");
         }
 
         private string SaveProfileImage()
         {
-            string imagesDirectory = "ProfilesImages";
-            string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imagesDirectory);
-
-            if (!Directory.Exists(directoryPath))
+            try
             {
-                Directory.CreateDirectory(directoryPath);
+                string imagesDirectory = "ProfilesImages";
+                string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imagesDirectory);
+
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                string fileName = $"{_data.id}_profile_image.jpg";
+                string filePath = Path.Combine(directoryPath, fileName);
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    BitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create((BitmapImage)profileImage.Source));
+                    encoder.Save(memoryStream);
+
+                    File.WriteAllBytes(filePath, memoryStream.ToArray());
+                }
+
+                return filePath;
             }
-
-            string fileName = $"{_data.id}_profile_image.jpg";
-            string filePath = Path.Combine(directoryPath, fileName);
-
-            using (MemoryStream memoryStream = new MemoryStream())
+            catch (Exception ex)
             {
-                BitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create((BitmapImage)profileImage.Source));
-                encoder.Save(memoryStream);
-
-                File.WriteAllBytes(filePath, memoryStream.ToArray());
+                MessageBox.Show("Ошибка:" + ex.Message);
+                return null;
             }
-
-            return filePath;
         }
+    
 
         private void editImageBtn_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png; *.gif)|*.jpg; *.jpeg; *.png; *.gif|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
+            try
             {
-                string imagePath = openFileDialog.FileName;
-
-                // Закрываем ресурсы текущего изображения, если они есть
-                if (profileImage.Source is BitmapImage bitmapImage)
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png; *.gif)|*.jpg; *.jpeg; *.png; *.gif|All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == true)
                 {
-                    bitmapImage.StreamSource?.Close(); // Закрываем поток, если он был открыт
-                    bitmapImage = null; // Очищаем ссылку на объект BitmapImage
-                }
+                    string imagePath = openFileDialog.FileName;
 
-                // Загружаем новое изображение
-                BitmapImage newBitmapImage = new BitmapImage(new Uri(imagePath));
-                profileImage.Source = newBitmapImage;
-                _data.image = imagePath;
+                    // Закрываем ресурсы текущего изображения, если они есть
+                    if (profileImage.Source is BitmapImage bitmapImage)
+                    {
+                        bitmapImage.StreamSource?.Close(); // Закрываем поток, если он был открыт
+                        bitmapImage = null; // Очищаем ссылку на объект BitmapImage
+                    }
+
+                    // Загружаем новое изображение
+                    BitmapImage newBitmapImage = new BitmapImage(new Uri(imagePath));
+                    profileImage.Source = newBitmapImage;
+                    _data.image = imagePath;
+                }
+            }
+
+            catch(Exception ex)
+            {
+                MessageBox.Show("Ошибка:" + ex.Message);
             }
         }
 
@@ -224,6 +244,63 @@ namespace Gaming_club.Windows
                         MessageBox.Show($"Свойство: {validationError.PropertyName} Ошибка: {validationError.ErrorMessage}");
                     }
                 }
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Вы точно хотите выйти?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            // Проверяем, что пользователь выбрал "да"
+            if (result == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
+        private void LoadGameLibrary()
+        {
+            var gameLibrary = db.date_of_game_library.ToList();
+            lbGameLibrary.ItemsSource = gameLibrary;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            
+            if (gridGameLibrary.Visibility == Visibility.Hidden)
+            {
+                gridGameLibrary.Visibility = Visibility.Visible;
+                gridCabinet.Visibility = Visibility.Hidden;
+            }
+
+            else
+            {
+                gridGameLibrary.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void lbGameLibrary_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Получаем выбранный элемент из ListBox
+            date_of_game_library selectedGame = lbGameLibrary.SelectedItem as date_of_game_library;
+
+            // Проверяем, что выбран элемент
+            if (selectedGame != null)
+            {
+                // Создаем новое окно для отображения выбранного элемента
+                GameDetailsWindow gameDetailsWindow = new GameDetailsWindow(selectedGame);
+
+                // Открываем новое окно
+                gameDetailsWindow.Show();
             }
         }
     }

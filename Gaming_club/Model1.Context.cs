@@ -35,6 +35,7 @@ namespace Gaming_club
         public virtual DbSet<game_thematic> game_thematic { get; set; }
         public virtual DbSet<players_of_game_library> players_of_game_library { get; set; }
         public virtual DbSet<players_of_tournament> players_of_tournament { get; set; }
+        public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<status> status { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tournament> tournaments { get; set; }

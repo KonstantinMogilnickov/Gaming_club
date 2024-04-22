@@ -28,7 +28,7 @@ namespace Gaming_club
         public string surname { get; set; }
         public string patrrynumic { get; set; }
         public string phone_number { get; set; }
-        public int permission { get; set; }
+        public int id_permission { get; set; }
         public string login { get; set; }
         public string password { get; set; }
         public string age { get; set; }
@@ -40,6 +40,7 @@ namespace Gaming_club
         public virtual ICollection<players_of_game_library> players_of_game_library { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<players_of_tournament> players_of_tournament { get; set; }
+        public virtual role role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tournament> tournaments { get; set; }
     }

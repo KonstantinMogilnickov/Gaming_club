@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Gaming_club.Windows"
         mc:Ignorable="d"
         Title="AdminPanel" Height="2000" Width="1920"
-        WindowState="Maximized" Loaded="Window_Loaded">
+        WindowState="Maximized" Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Grid>
         <ScrollViewer>
@@ -212,11 +212,11 @@
                         <ColumnDefinition Width="27*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Вывод списка пользователей"
-                       HorizontalAlignment="Left" Height="36" Margin="324,10,0,0"
+                       HorizontalAlignment="Left" Height="36" Margin="324,-13,0,0"
                        VerticalAlignment="Top" Width="312" FontSize="20" 
                        FontFamily="Segoe UI Black"/>
 
-                    <ListBox x:Name="listBoxUser" Margin="23,51,10,244" SelectedValuePath="ID" Grid.ColumnSpan="2">
+                    <ListBox x:Name="listBoxUser" Margin="23,28,10,267" SelectedValuePath="ID" Grid.ColumnSpan="2">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>

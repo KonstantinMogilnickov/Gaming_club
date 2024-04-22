@@ -64,14 +64,14 @@ namespace Gaming_club.Windows
                 {
                     if (user_Data.password == password)
                     {
-                        if (user_Data.permission == 1 || user_Data.permission == 3)
+                        if (user_Data.id_permission == 1 || user_Data.id_permission == 3)
                         {
                             MainMenuWindow mainMenuWindow = new MainMenuWindow(user_Data);
                             mainMenuWindow.Show();
                             this.Close();
                         }
 
-                        else if (user_Data.permission == 0)
+                        else if (user_Data.id_permission == 0)
                         {
                             MessageBox.Show("Вы были заблокированы за нарушение правил пользования сервисом!");
                         }
@@ -133,5 +133,6 @@ namespace Gaming_club.Windows
             // Устанавливаем остальные свойства
             btnAuth.BorderThickness = new Thickness(0);
         }
+
     }
 }

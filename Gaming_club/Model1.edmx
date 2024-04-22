@@ -81,6 +81,13 @@
           <Property Name="reg_date" Type="datetime" />
           <Property Name="id_status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="permission" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="status">
           <Key>
             <PropertyRef Name="id" />
@@ -121,7 +128,7 @@
           <Property Name="surname" Type="nvarchar" MaxLength="50" />
           <Property Name="patrrynumic" Type="nvarchar" MaxLength="50" />
           <Property Name="phone_number" Type="nvarchar" MaxLength="50" />
-          <Property Name="permission" Type="int" Nullable="false" />
+          <Property Name="id_permission" Type="int" Nullable="false" />
           <Property Name="login" Type="nvarchar" MaxLength="50" />
           <Property Name="password" Type="nvarchar" MaxLength="50" />
           <Property Name="age" Type="nvarchar" MaxLength="50" />
@@ -283,6 +290,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_data_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="User_data" Type="Self.User_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User_data">
+              <PropertyRef Name="id_permission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -323,6 +342,7 @@
           <EntitySet Name="game_thematic" EntityType="Self.game_thematic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="players_of_game_library" EntityType="Self.players_of_game_library" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="players_of_tournament" EntityType="Self.players_of_tournament" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tournament" EntityType="Self.tournament" Schema="dbo" store:Type="Tables" />
@@ -378,6 +398,10 @@
           <AssociationSet Name="FK_tournament_User_data" Association="Self.FK_tournament_User_data">
             <End Role="User_data" EntitySet="User_data" />
             <End Role="tournament" EntitySet="tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_data_role" Association="Self.FK_User_data_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="User_data" EntitySet="User_data" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -479,6 +503,14 @@
           <NavigationProperty Name="tournament" Relationship="Self.FK_players_of_tournament_tournament" FromRole="players_of_tournament" ToRole="tournament" />
           <NavigationProperty Name="User_data" Relationship="Self.FK_players_of_tournament_User_data" FromRole="players_of_tournament" ToRole="User_data" />
         </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="permission" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User_data" Relationship="Self.FK_User_data_role" FromRole="role" ToRole="User_data" />
+        </EntityType>
         <EntityType Name="status">
           <Key>
             <PropertyRef Name="id" />
@@ -523,7 +555,7 @@
           <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="patrrynumic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="permission" Type="Int32" Nullable="false" />
+          <Property Name="id_permission" Type="Int32" Nullable="false" />
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="age" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -531,6 +563,7 @@
           <NavigationProperty Name="date_of_game_library" Relationship="Self.FK_date_of_game_library_User_data" FromRole="User_data" ToRole="date_of_game_library" />
           <NavigationProperty Name="players_of_game_library" Relationship="Self.FK_players_of_game_library_User_data" FromRole="User_data" ToRole="players_of_game_library" />
           <NavigationProperty Name="players_of_tournament" Relationship="Self.FK_players_of_tournament_User_data" FromRole="User_data" ToRole="players_of_tournament" />
+          <NavigationProperty Name="role" Relationship="Self.FK_User_data_role" FromRole="User_data" ToRole="role" />
           <NavigationProperty Name="tournaments" Relationship="Self.FK_tournament_User_data" FromRole="User_data" ToRole="tournament" />
         </EntityType>
         <Association Name="FK_date_of_game_library_game">
@@ -677,6 +710,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_data_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="User_data" Type="Self.User_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User_data">
+              <PropertyRef Name="id_permission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tournament_User_data">
           <End Role="User_data" Type="Self.User_data" Multiplicity="0..1" />
           <End Role="tournament" Type="Self.tournament" Multiplicity="*" />
@@ -698,6 +743,7 @@
           <EntitySet Name="game_thematic" EntityType="Self.game_thematic" />
           <EntitySet Name="players_of_game_library" EntityType="Self.players_of_game_library" />
           <EntitySet Name="players_of_tournament" EntityType="Self.players_of_tournament" />
+          <EntitySet Name="roles" EntityType="Self.role" />
           <EntitySet Name="status" EntityType="Self.status" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tournaments" EntityType="Self.tournament" />
@@ -749,6 +795,10 @@
           <AssociationSet Name="FK_players_of_tournament_User_data" Association="Self.FK_players_of_tournament_User_data">
             <End Role="User_data" EntitySet="User_data" />
             <End Role="players_of_tournament" EntitySet="players_of_tournament" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_data_role" Association="Self.FK_User_data_role">
+            <End Role="role" EntitySet="roles" />
+            <End Role="User_data" EntitySet="User_data" />
           </AssociationSet>
           <AssociationSet Name="FK_tournament_User_data" Association="Self.FK_tournament_User_data">
             <End Role="User_data" EntitySet="User_data" />
@@ -886,6 +936,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="Gaming_clubModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="permission" ColumnName="permission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="status">
             <EntityTypeMapping TypeName="Gaming_clubModel.status">
               <MappingFragment StoreEntitySet="status">
@@ -928,7 +986,7 @@
                 <ScalarProperty Name="surname" ColumnName="surname" />
                 <ScalarProperty Name="patrrynumic" ColumnName="patrrynumic" />
                 <ScalarProperty Name="phone_number" ColumnName="phone_number" />
-                <ScalarProperty Name="permission" ColumnName="permission" />
+                <ScalarProperty Name="id_permission" ColumnName="id_permission" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="age" ColumnName="age" />
