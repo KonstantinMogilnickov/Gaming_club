@@ -36,6 +36,11 @@ namespace Gaming_club.Windows
             {
                 MessageBox.Show("ты че мелочь куда лезешь во взрослые игры?");
             }
+            else if (_User.id_permission == 3 || _User.id_permission == 2)
+            {
+                MessageBox.Show("Возможность заблокирована для сотрудников");
+            }
+
             else
             {
                 players_of_game_library player_Of_Game_Library = new players_of_game_library

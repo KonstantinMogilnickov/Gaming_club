@@ -64,7 +64,7 @@ namespace Gaming_club.Windows
                 {
                     if (user_Data.password == password)
                     {
-                        if (user_Data.id_permission == 1 || user_Data.id_permission == 3)
+                        if (user_Data.id_permission == 1 )
                         {
                             MainMenuWindow mainMenuWindow = new MainMenuWindow(user_Data);
                             mainMenuWindow.Show();
@@ -76,9 +76,9 @@ namespace Gaming_club.Windows
                             MessageBox.Show("Вы были заблокированы за нарушение правил пользования сервисом!");
                         }
 
-                        else
+                        else if (user_Data.id_permission == 2 || user_Data.id_permission == 3)
                         {
-                            AdminPanel admin = new AdminPanel();
+                            AdminPanel admin = new AdminPanel(user_Data);
                             admin.Show();
                             this.Close();
                         }

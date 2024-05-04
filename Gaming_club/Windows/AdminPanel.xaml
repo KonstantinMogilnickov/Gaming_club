@@ -69,6 +69,11 @@
                         HorizontalAlignment="Left" Height="47" 
                         Margin="594,402,0,0" VerticalAlignment="Top"
                         Width="296" Click="btnAddGame_Click"/>
+                    <Button x:Name="btnClient" 
+                            Content="Зайти на форму клиента" 
+                            HorizontalAlignment="Left" Height="47" 
+                            Margin="594,126,0,0" VerticalAlignment="Top"
+                            Width="296" Click="btnClient_Click"/>
 
                 </Grid>
                 <Grid Height="1199" Width="943" VerticalAlignment="Top" 
@@ -205,7 +210,7 @@
 
                 </Grid>
 
-                <Grid Height="675" Width="960" VerticalAlignment="Top" 
+                <Grid x:Name="userGrid" Visibility="Hidden" Height="675" Width="960" VerticalAlignment="Top" 
                   HorizontalAlignment="Left" Background="AntiqueWhite" Margin="0,524,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="133*"/>

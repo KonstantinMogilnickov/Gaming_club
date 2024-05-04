@@ -1,11 +1,11 @@
-﻿<Window x:Class="Gaming_club.Windows.GameDetailsWindow"
+﻿<Window x:Class="Gaming_club.Windows.TouurnamentDetails"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gaming_club.Windows"
         mc:Ignorable="d"
-        Title="GameDetailsWindow" Height="450" Width="800">
+        Title="TouurnamentDetails" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="TextBox" x:Key="PlaceholderTextBoxStyle">
             <Setter Property="Template">
@@ -67,67 +67,55 @@
         <Label 
             Name="lblTitle"
             Content="1" 
-            HorizontalAlignment="Center" 
-            Margin="0,10,0,0" 
+            HorizontalAlignment="Left" 
+            Margin="10,10,0,0" 
             VerticalAlignment="Top"
             FontSize="20"
             />
         <Label 
             Name="lblAge"
             Content="2" 
-            HorizontalAlignment="Center" 
-            Margin="0,52,0,0" 
+            HorizontalAlignment="Left" 
+            Margin="10,52,0,0" 
             VerticalAlignment="Top"
             FontSize="20"/>
         <Label 
             Name="lblDescription"
             Content="3" 
-            HorizontalAlignment="Center" 
-            Margin="0,94,0,0" 
+            HorizontalAlignment="Left" 
+            Margin="10,94,0,0" 
             VerticalAlignment="Top"
             FontSize="20"/>
         <Label 
             Name="lblDate"
             Content="4" 
-            HorizontalAlignment="Center" 
-            Margin="0,136,0,0" 
-            VerticalAlignment="Top"
-            FontSize="20"/>
-        <Label 
-            Name="lblMinPlayer"
-            Content="5" 
-            HorizontalAlignment="Center" 
-            Margin="0,178,0,0" 
-            VerticalAlignment="Top"
-            FontSize="20"/>
-        <Label 
-            Name="lblMaxPlayer"
-            Content="6" 
-            HorizontalAlignment="Center" 
-            Margin="0,220,0,0" 
+            HorizontalAlignment="Left" 
+            Margin="10,136,0,0" 
             VerticalAlignment="Top"
             FontSize="20"/>
         <Label 
             Name="lblMaster"
             Content="7" 
-            HorizontalAlignment="Center" 
-            Margin="0,262,0,0" 
+            HorizontalAlignment="Left" 
+            Margin="10,178,0,0" 
             VerticalAlignment="Top"
             FontSize="20"/>
         <Label 
             Name="lblGame"
             Content="8" 
-            HorizontalAlignment="Center" 
-            Margin="0,304,0,0" 
+            HorizontalAlignment="Left" 
+            Margin="10,220,0,0" 
             VerticalAlignment="Top"
             FontSize="20"/>
-        <Button x:Name="btnRegistration"
-            Content="Регистрация в игротеке" 
-                HorizontalAlignment="Center" 
-                Margin="0,366,0,0" 
+        <Button 
+            
+            x:Name="btnRegistration"
+            Content="Регистрация в турнире" 
+                HorizontalAlignment="Left" 
+                Margin="10,262,0,0" 
                 VerticalAlignment="Top" 
                 Height="38" 
-                Style= "{StaticResource NoHoverButton}"
-                Width="267" Click="btnRegistration_Click"/>
+                Width="219" Click="btnRegistration_Click"
+                Style= "{StaticResource NoHoverButton}"/>
     </Grid>
 </Window>

@@ -12,10 +12,11 @@ namespace Gaming_club.Windows
     {
         Gaming_clubEntities db = new Gaming_clubEntities();
         private string sourceImage;
-        public AdminPanel()
+        private User_data currentUser;
+        public AdminPanel(User_data user)
         {
             InitializeComponent();
-
+            this.currentUser = user;
             FillComboBox();
             LoadUser();
         }
@@ -161,6 +162,15 @@ namespace Gaming_club.Windows
             else
             {
                 txtPrice.Visibility = Visibility.Visible;
+            }
+
+            if(currentUser.id_permission == 3)
+            {
+                userGrid.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                userGrid.Visibility = Visibility.Visible;
             }
         }
 
@@ -318,17 +328,23 @@ namespace Gaming_club.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Вы точно хотите выйти?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            //MessageBoxResult result = MessageBox.Show("Вы точно хотите выйти?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-            // Проверяем, что пользователь выбрал "да"
-            if (result == MessageBoxResult.No)
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                Application.Current.Shutdown();
-            }
+            //// Проверяем, что пользователь выбрал "да"
+            //if (result == MessageBoxResult.No)
+            //{
+            //    e.Cancel = true;
+            //}
+            //else
+            //{
+            //    Application.Current.Shutdown();
+            //}
+        }
+
+        private void btnClient_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenuWindow mainMenuWindow = new MainMenuWindow(currentUser);
+            mainMenuWindow.Show();
         }
     }
 }

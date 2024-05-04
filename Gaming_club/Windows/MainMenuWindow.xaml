@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Gaming_club.Windows"
         mc:Ignorable="d"
         Title="Главное меню" Height="1080" Width="1920"
-        WindowState="Maximized" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing">
+        WindowState="Maximized" Loaded="Window_Loaded" Closing="Window_Closing">
     <Window.Resources>
         <Style x:Key="NoHoverButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -74,13 +74,15 @@
             </Button.RenderTransform>
         </Button>
 
-        <Button Content="ТУРНИРЫ" 
+        <Button 
+                Name="btnTournament"
+                Content="ТУРНИРЫ" 
                 HorizontalAlignment="Left" Margin="-42,818,0,0" 
                 VerticalAlignment="Top" Width="203" FontFamily="Segoe UI Black" 
                 BorderBrush="#00707070" Background="#00DDDDDD"
                 RenderTransformOrigin="0.5,0.5" FontSize="20" 
                 Style="{StaticResource NoHoverButton}"
-                Cursor="Hand">
+                Cursor="Hand" Click="btnTournament_Click">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -150,7 +152,7 @@
 
         <Grid Name="gridGameLibrary" HorizontalAlignment="Left" Height="979" Margin="91,75,0,0" 
               VerticalAlignment="Top" Width="1827"
-              Visibility="Visible">
+              Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="428*"/>
                 <RowDefinition Height="551*"/>
@@ -175,6 +177,45 @@
                                 <Run Text="{Binding min_age}"/>
                             </TextBlock>
 
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <Grid Name="gridTournament" HorizontalAlignment="Left" Height="979" Margin="91,75,0,0" 
+              VerticalAlignment="Top" Width="1827"
+              Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="428*"/>
+                <RowDefinition Height="551*"/>
+            </Grid.RowDefinitions>
+            <Label 
+                Content="Расписание турниров" 
+                HorizontalAlignment ="Center" 
+                FontSize="60" 
+                Grid.RowSpan="2"/>
+            <ListBox HorizontalAlignment="Left" 
+                     Height="804" 
+                     Margin="59,98,0,0" 
+                     VerticalAlignment="Top" 
+                     Width="1698"
+                     FontSize="20" Grid.RowSpan="2"
+                     Name="lbTournament" SelectionChanged="lbTournament_SelectionChanged" 
+                     >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock>                       
+                                <Run Text=" Название: " FontWeight="Bold"/>
+                                <Run Text="{Binding title}" FontWeight="Light"/>
+                                <Run Text=" Дата начала: " FontWeight="Bold"/>
+                                <Run Text="{Binding date_of_tournament}" FontWeight="Light"/>
+                                <Run Text="Минимальный возраст: " FontWeight="Bold"/> 
+                                <Run Text="{Binding min_age}"/>
+                                <Run Text="Цена" FontWeight="Bold"/> 
+                                <Run Text="{Binding price}"/>
+                            </TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

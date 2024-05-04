@@ -25,6 +25,7 @@ namespace Gaming_club.Windows
             _data = user;
             FillUserData();
             LoadGameLibrary();
+            LoadTournament();
         }
 
         private void FillUserData()
@@ -119,6 +120,7 @@ namespace Gaming_club.Windows
             {
                 gridCabinet.Visibility = Visibility.Visible;
                 gridGameLibrary.Visibility = Visibility.Hidden;
+                gridTournament.Visibility = Visibility.Hidden;
             }
 
             else
@@ -247,11 +249,6 @@ namespace Gaming_club.Windows
             }
         }
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            
-        }
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Вы точно хотите выйти?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Information);
@@ -273,6 +270,12 @@ namespace Gaming_club.Windows
             lbGameLibrary.ItemsSource = gameLibrary;
         }
 
+        private void LoadTournament()
+        {
+            var tournament = db.tournaments.ToList();
+            lbTournament.ItemsSource = tournament;
+        }
+
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             
@@ -280,6 +283,7 @@ namespace Gaming_club.Windows
             {
                 gridGameLibrary.Visibility = Visibility.Visible;
                 gridCabinet.Visibility = Visibility.Hidden;
+                gridTournament.Visibility = Visibility.Hidden;
             }
 
             else
@@ -298,9 +302,39 @@ namespace Gaming_club.Windows
             {
                 // Создаем новое окно для отображения выбранного элемента
                 GameDetailsWindow gameDetailsWindow = new GameDetailsWindow(selectedGame, _data);
-
                 // Открываем новое окно
                 gameDetailsWindow.Show();
+            }
+
+            else
+            {
+                MessageBox.Show("Выберите игротеку");
+            }
+        }
+
+        private void lbTournament_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tournament tournament = lbTournament.SelectedItem as tournament;
+
+            if (tournament != null)
+            {
+                TouurnamentDetails touurnamentDetails = new TouurnamentDetails(tournament, _data);
+                touurnamentDetails.Show();
+            }
+            else MessageBox.Show("Выберите турнир");               
+        }
+
+        private void btnTournament_Click(object sender, RoutedEventArgs e)
+        {
+            if (gridTournament.Visibility == Visibility.Hidden)
+            {
+                gridTournament.Visibility = Visibility.Visible;
+                gridCabinet.Visibility = Visibility.Hidden;
+                gridGameLibrary.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                gridTournament.Visibility = Visibility.Hidden;
             }
         }
     }
