@@ -16,11 +16,11 @@ namespace Gaming_club.classes
             this.db = dbContext;
         }
 
-        public void RegisterUser(string name, string surname, string patrynumic, string phoneNumber, int permission, string login, string password, string age, string image, string confirmPassword, RegistrationWindow registration)
+        public void RegisterUser(string name, string surname, string patrynumic, string phoneNumber, int permission, string login, string password, int age, string image, string confirmPassword, RegistrationWindow registration)
         {
             Regex passwordRegex = new Regex(@"^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$");
             //проверка на заполнение полей
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(surname) || string.IsNullOrWhiteSpace(patrynumic) || string.IsNullOrWhiteSpace(phoneNumber) || string.IsNullOrWhiteSpace(login) || age == null)
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(surname) || string.IsNullOrWhiteSpace(patrynumic) || string.IsNullOrWhiteSpace(phoneNumber) || string.IsNullOrWhiteSpace(login) || age == 0)
             {
                 MessageBox.Show("Вы не заполнили все поля!");
             }

@@ -155,7 +155,7 @@ namespace Gaming_club.Windows
             string login = txtLogin.Text.Trim();
             string password = txtPassword.Password.Trim();
             string confirmPassword = txtConfirmPassword.Password.Trim();
-            string age = txtAge.Text.Trim();
+            int age = Convert.ToInt32(txtAge.Text.Trim());
             string image = null;
 
             registrationUser.RegisterUser(name, surname, patrynumic, phoneNumber, permission, login, password, age, image, confirmPassword,this);

@@ -9,11 +9,67 @@
     <Grid>
         <Label 
             Name="lblTitle"
-            Content="" 
+            Content="1" 
             HorizontalAlignment="Center" 
             Margin="0,10,0,0" 
             VerticalAlignment="Top"
+            FontSize="20"
+            />
+        <Label 
+            Name="lblAge"
+            Content="2" 
+            HorizontalAlignment="Center" 
+            Margin="0,52,0,0" 
+            VerticalAlignment="Top"
             FontSize="20"/>
-
+        <Label 
+            Name="lblDescription"
+            Content="3" 
+            HorizontalAlignment="Center" 
+            Margin="0,94,0,0" 
+            VerticalAlignment="Top"
+            FontSize="20"/>
+        <Label 
+            Name="lblDate"
+            Content="4" 
+            HorizontalAlignment="Center" 
+            Margin="0,136,0,0" 
+            VerticalAlignment="Top"
+            FontSize="20"/>
+        <Label 
+            Name="lblMinPlayer"
+            Content="5" 
+            HorizontalAlignment="Center" 
+            Margin="0,178,0,0" 
+            VerticalAlignment="Top"
+            FontSize="20"/>
+        <Label 
+            Name="lblMaxPlayer"
+            Content="6" 
+            HorizontalAlignment="Center" 
+            Margin="0,220,0,0" 
+            VerticalAlignment="Top"
+            FontSize="20"/>
+        <Label 
+            Name="lblMaster"
+            Content="7" 
+            HorizontalAlignment="Center" 
+            Margin="0,262,0,0" 
+            VerticalAlignment="Top"
+            FontSize="20"/>
+        <Label 
+            Name="lblGame"
+            Content="8" 
+            HorizontalAlignment="Center" 
+            Margin="0,304,0,0" 
+            VerticalAlignment="Top"
+            FontSize="20"/>
+        <Button x:Name="btnRegistration"
+            Content="Регистрация в игротеке" 
+                HorizontalAlignment="Center" 
+                Margin="0,366,0,0" 
+                VerticalAlignment="Top" 
+                Height="38" 
+                Width="144" Click="btnRegistration_Click"/>
     </Grid>
 </Window>

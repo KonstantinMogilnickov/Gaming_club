@@ -166,9 +166,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock>
-                                <Run Text="id: " FontWeight="Bold"/>
-                                <Run Text="{Binding id}" FontWeight="Light"/>
+                            <TextBlock>                       
                                 <Run Text=" Название: " FontWeight="Bold"/>
                                 <Run Text="{Binding title}" FontWeight="Light"/>
                                 <Run Text=" Дата начала: " FontWeight="Bold"/>

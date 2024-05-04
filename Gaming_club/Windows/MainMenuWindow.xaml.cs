@@ -297,7 +297,7 @@ namespace Gaming_club.Windows
             if (selectedGame != null)
             {
                 // Создаем новое окно для отображения выбранного элемента
-                GameDetailsWindow gameDetailsWindow = new GameDetailsWindow(selectedGame);
+                GameDetailsWindow gameDetailsWindow = new GameDetailsWindow(selectedGame, _data);
 
                 // Открываем новое окно
                 gameDetailsWindow.Show();
